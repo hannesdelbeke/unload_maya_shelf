@@ -1,5 +1,10 @@
 # Maya unload shelf
 
+Unload a shelf in Autodesk Maya, without changing the original shelf file.
+No confirm dialogue for easier use in scripting.
+Adapted from the deleteShelfTab function.
+To allow easy diff in case of future updates I simply commented out the changes in code.
+
 ## Installation
 place script in 
 ```
