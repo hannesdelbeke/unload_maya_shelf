@@ -1,0 +1,13 @@
+// ===========================================================================
+// Copyright 2018 Autodesk, Inc. All rights reserved.
+//
+// Use of this software is subject to the terms of the Autodesk license
+// agreement provided at the time of installation or download, or which
+// otherwise accompanies this software in either electronic or hard copy form.
+// ===========================================================================
+displayString -replace -value "Alert" m_deleteShelfTab.kAlert;
+displayString -replace -value "Cancel" m_deleteShelfTab.kCancel;
+displayString -replace -value "       Cannot delete the last shelf.        " m_deleteShelfTab.kCannotDelete;
+displayString -replace -value "Confirm" m_deleteShelfTab.kConfirm;
+displayString -replace -value "Are you sure you want to delete the shelf '^1s'?" m_deleteShelfTab.kDeletionConfirmMsg;
+displayString -replace -value "OK" m_deleteShelfTab.kOK;
