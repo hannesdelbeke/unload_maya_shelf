@@ -11,29 +11,29 @@
 //
 //
 //<doc>
-//<name deleteShelfTab>
+//<name unloadShelfTab>
 //
 //<synopsis>
-//		deleteShelfTab (string $shelfName) 
+//		unloadShelfTab (string $shelfName) 
 //
 //<returns>
-//		int :	1 = shelf tab was deleted
-//				0 = if shelf tab not deleted
+//		int :	1 = shelf tab was unloaded
+//				0 = if shelf tab not unloaded
 //
 //<description>
-//		Deletes a shelf layout and tab from the top level shelves, 
+//		Unloads a shelf layout and tab from the top level shelves, 
 //      and removes its preferences so that it will not be loaded
-//		again.  The user is prompted for confirmation of the delete.
+//		again.  The user is not prompted for confirmation of the unload.
 //
 //<flags>
-//		string $shelfName Name of the shelf tab to delete
+//		string $shelfName Name of the shelf tab to unload
 //
 //<examples>
-//  deleteShelfTab "Shelf2";
+//  unloadShelfTab "Shelf2";
 //
 //</doc>
 
-global proc int deleteShelfTab(string $shelfName) 
+global proc int unloadShelfTab(string $shelfName) 
 {
 	int $returnStatus = 0;
 	
@@ -66,17 +66,17 @@ global proc int deleteShelfTab(string $shelfName)
 		source "shelfLabel.mel";
 	}
 	
-	string $msg        = (uiRes("m_deleteShelfTab.kDeletionConfirmMsg"));
-	string $shelfLabel = `shelfLabel_melToUI $shelfName`;
-	string $dlgMsg     = `format -s $shelfLabel $msg`;  
-	string $cancel     = (uiRes("m_deleteShelfTab.kCancel"));
-	
-	if ($cancel == `confirmDialog -title (uiRes("m_deleteShelfTab.kConfirm")) 
-		-message $dlgMsg	-button $ok  -button $cancel -defaultButton $ok
-		-cancelButton $cancel  -dismissString $cancel `) 
-	{
-		return $returnStatus;
-	}
+	// string $msg        = (uiRes("m_deleteShelfTab.kDeletionConfirmMsg"));
+	// string $shelfLabel = `shelfLabel_melToUI $shelfName`;
+	// string $dlgMsg     = `format -s $shelfLabel $msg`;  
+	// string $cancel     = (uiRes("m_deleteShelfTab.kCancel"));
+	// 
+	// if ($cancel == `confirmDialog -title (uiRes("m_deleteShelfTab.kConfirm")) 
+	// 	-message $dlgMsg	-button $ok  -button $cancel -defaultButton $ok
+	// 	-cancelButton $cancel  -dismissString $cancel `) 
+	// {
+	// 	return $returnStatus;
+	// }
 
 	// Okay, now we can delete the shelf tab
 	
@@ -116,21 +116,22 @@ global proc int deleteShelfTab(string $shelfName)
 	string $shelfArray[];
 	string $PATH_SEPARATOR = `about -win`? ";" : ":";
 	tokenize($shelfDirs, $PATH_SEPARATOR, $shelfArray);
-	for( $i = 0; $i < size($shelfArray); $i++ ) {
-		$fileName = ($shelfArray[$i] + "shelf_" + $shelfName + ".mel");
-		string $deletedFileName = $fileName + ".deleted";
-
-		//	Fix for bug #125494.  Remove the .deleted file if it already exists.
-		//
-		if (`filetest -r $deletedFileName`) {
-			sysFile -delete $deletedFileName;
-		}
 	
-		if (`file -q -exists $fileName`) {
-			sysFile -rename $deletedFileName $fileName;
-			break;
-		}
-	}
+	// for( $i = 0; $i < size($shelfArray); $i++ ) {
+	// 	$fileName = ($shelfArray[$i] + "shelf_" + $shelfName + ".mel");
+	// 	string $deletedFileName = $fileName + ".deleted";
+	// 
+	// 	//	Fix for bug #125494.  Remove the .deleted file if it already exists.
+	// 	//
+	// 	if (`filetest -r $deletedFileName`) {
+	// 		sysFile -delete $deletedFileName;
+	// 	}
+	// 
+	// 	if (`file -q -exists $fileName`) {
+	// 		sysFile -rename $deletedFileName $fileName;
+	// 		break;
+	// 	}
+	// }
 	
 	//  Make sure the new active shelf tab has buttons.
 	shelfTabChange();
