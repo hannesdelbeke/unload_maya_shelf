@@ -14,7 +14,7 @@ or include in your scriptpath
 
 ## Usage
 call using mel script
-```
+```javascript
 unloadShelfTab("my_shelf_name");
 ```
 
