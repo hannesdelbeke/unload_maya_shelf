@@ -1,9 +1,7 @@
 # Maya unload shelf
+To remove a shelf in Autodesk Maya, you can use Maya's `deleteShelf` command. But this changes the original shelf file.  
+This script let's you simply unload a shelf, without changing the original shelf file.
 
-Unload a shelf in Autodesk Maya, without changing the original shelf file.
-No confirm dialogue for easier use in scripting.
-Adapted from the deleteShelfTab function.
-To allow easy diff in case of future updates I simply commented out the changes in code.
 
 ## Installation
 place script in 
@@ -20,4 +18,7 @@ unloadShelfTab("my_shelf_name");
 
 ## Note
 
-If your shelf is not manually loaded, but in a shelves folder that is auto loaded on maya startup, your shelf will reappear when restarting maya.
+- No confirm dialogue for easier use in scripting.
+- Adapted from the `deleteShelfTab` function.  
+  To allow easy diff in case of future updates I simply commented out the changes in code.
+- Unloading a shelf won't be remembered in the next Maya session, if you auto load the shelf on startup (e.g. shelves in the shelves folder). The `unloadShelfTab` command is meant to be used together with `loadNewShelf` command, so you can load and unload shelves in a maya session
